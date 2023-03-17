@@ -47,13 +47,32 @@ class Grid {
     //         state
     //     ));
     // }
-
+    encounter() {
+        let randomNumber = Math.random();
+        if (randomNumber < 0.2) {
+            console.log("Encountered a yeti!");
+        } else if (randomNumber < 0.3) {
+            console.log("Encountered Bigfoot!");
+        } else if (randomNumber < 0.4) {
+            console.log("Encountered Dracula!");
+        } else {
+            console.log("There's nothing here.");
+        }
+    }
     moveRight(mover) {
         //handle player movement
         if (mover === "player") {
             //first check if I can move here
             if (this.playerX === this.width - 1) {
                 return process.stdout.write("Cannot move here \n");
+            }
+            //check if the tile i'm about to visited is unvisited
+            if (
+                this.grid[this.playerY][this.playerX + 1].state === "unvisited"
+            ) {
+                // console.log("Visited an unvisited tile");
+                this.encounter();
+                //random generation for encounters
             }
             // mark the tile i'm on as visited
             this.grid[this.playerY][this.playerX] = new GridObject(
@@ -67,6 +86,10 @@ class Grid {
                 " @ ",
                 "player"
             );
+            //check if i've won
+            if (this.playerY === 0 && this.playerX === this.width - 1) {
+                console.log("You Win!");
+            }
             // this.updateTileAtPlayer(" @ ", "player");
             //update grid
             return this.drawGrid();
@@ -79,6 +102,14 @@ class Grid {
             if (this.playerX === 0) {
                 return process.stdout.write("Cannot move here \n");
             }
+            //check if the tile i'm about to visited is unvisited
+            if (
+                this.grid[this.playerY][this.playerX - 1].state === "unvisited"
+            ) {
+                // console.log("Visited an unvisited tile");
+                this.encounter();
+                //random generation for encounters
+            }
             //mark the tile i'm on as visited
             this.grid[this.playerY][this.playerX] = new GridObject(
                 " _ ",
@@ -90,6 +121,10 @@ class Grid {
                 " @ ",
                 "player"
             );
+            //check if i've won
+            if (this.playerY === 0 && this.playerX === this.width - 1) {
+                console.log("You Win!");
+            }
             //update grid
             return this.drawGrid();
         }
@@ -100,6 +135,14 @@ class Grid {
             //first check if I can move here
             if (this.playerY === 0) {
                 return process.stdout.write("Cannot move here \n");
+            }
+            //check if the tile i'm about to visited is unvisited
+            if (
+                this.grid[this.playerY - 1][this.playerX].state === "unvisited"
+            ) {
+                // console.log("Visited an unvisited tile");
+                this.encounter();
+                //random generation for encounters
             }
             //mark the tile i'm on as visited
             this.grid[this.playerY][this.playerX] = new GridObject(
@@ -112,6 +155,10 @@ class Grid {
                 " @ ",
                 "player"
             );
+            //check if i've won
+            if (this.playerY === 0 && this.playerX === this.width - 1) {
+                console.log("You Win!");
+            }
             //update grid
             return this.drawGrid();
         }
@@ -119,9 +166,17 @@ class Grid {
     moveDown(mover) {
         //handle player movement
         if (mover === "player") {
-            //first check if I can move here
             if (this.playerY === this.height - 1) {
+                //first check if I can move here
                 return process.stdout.write("Cannot move here \n");
+            }
+            //check if the tile i'm about to visited is unvisited
+            if (
+                this.grid[this.playerY + 1][this.playerX].state === "unvisited"
+            ) {
+                // console.log("Visited an unvisited tile");
+                this.encounter();
+                //random generation for encounters
             }
             //mark the tile i'm on as visited
             this.grid[this.playerY][this.playerX] = new GridObject(
@@ -134,6 +189,10 @@ class Grid {
                 " @ ",
                 "player"
             );
+            //check if i've won
+            if (this.playerY === 0 && this.playerX === this.width - 1) {
+                console.log("You Win!");
+            }
             //update grid
             return this.drawGrid();
         }
@@ -146,3 +205,28 @@ myGrid.moveRight("player");
 myGrid.moveUp("player");
 myGrid.moveLeft("player");
 myGrid.moveDown("player");
+myGrid.moveRight("player");
+myGrid.moveUp("player");
+myGrid.moveLeft("player");
+myGrid.moveRight("player");
+myGrid.moveRight("player");
+myGrid.moveRight("player");
+myGrid.moveRight("player");
+myGrid.moveRight("player");
+myGrid.moveRight("player");
+myGrid.moveRight("player");
+myGrid.moveRight("player");
+myGrid.moveRight("player");
+myGrid.moveRight("player");
+myGrid.moveRight("player");
+myGrid.moveRight("player");
+myGrid.moveRight("player");
+myGrid.moveRight("player");
+myGrid.moveUp("player");
+myGrid.moveUp("player");
+myGrid.moveUp("player");
+myGrid.moveUp("player");
+myGrid.moveUp("player");
+myGrid.moveUp("player");
+myGrid.moveUp("player");
+myGrid.moveUp("player");
